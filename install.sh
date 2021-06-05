@@ -15,7 +15,7 @@ install_server(){
   rm BeamMP_Server.zip
   chmod +x BeamMP-Server-linux
   screen -AmdS install_temp ./BeamMP-Server-linux
-  wget https://github.com/LiLZora-lut/unofficial-BeamMP-Server-installer/releases/download/0.3/server.sh
+  wget https://github.com/LiLZora-lut/unofficial-BeamMP-Server-installer/releases/download/install_part/server.sh
   chmod +x server.sh
   echo ⠀
   echo -e "before you start the server you have to edit the server.cfg with ${com}nano Server.cfg${NC} so that you can enter your authkey."
