@@ -31,5 +31,5 @@ case "$1" in
         screen -r beammp
     ;;
     *)
-        echo "Invalid usage: ${0} {start | stop | restart | help}"
+        echo "Invalid usage: ${0} {start | stop | restart | terminal |help}"
 esac
