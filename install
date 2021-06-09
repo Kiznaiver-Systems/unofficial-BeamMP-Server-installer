@@ -18,8 +18,8 @@ install_all(){
   rm BeamMP_Server.zip
   chmod +x BeamMP-Server-linux
   screen -AmdS install_temp ./BeamMP-Server-linux
-  wget https://github.com/LiLZora-lut/unofficial-BeamMP-Server-installer/releases/download/install_part/server.sh
-  chmod +x server.sh
+  wget https://github.com/LiLZora-lut/unofficial-BeamMP-Server-installer/releases/download/start_scr/server
+  chmod +x server
   echo ⠀
   echo -e "before you start the server you have to edit the server.cfg with ${com}nano Server.cfg${NC} so that you can enter your authkey."
   echo ⠀
@@ -31,8 +31,8 @@ install_all(){
 }
 #Installs only the server script
 install_script(){
-  wget https://github.com/LiLZora-lut/unofficial-BeamMP-Server-installer/releases/download/install_part/server.sh
-  chmod +x server.sh
+  wget https://github.com/LiLZora-lut/unofficial-BeamMP-Server-installer/releases/download/start_scr/server
+  chmod +x server
   sleep 1
   echo ⠀
   echo -e "then you can start the server with ${com}./server start${NC}."
@@ -66,7 +66,7 @@ about(){
       echo ⠀
       echo run as root "apt install wget screen liblua5.3-dev unzip -y" to be sure
       echo ⠀;;
-      * ) echo "Please answer yes , no or help.";;
+      * ) echo "Please answer yes , no or help.; ";;
   esac
 #Query what should be done
 while true; do
