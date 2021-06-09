@@ -25,7 +25,7 @@ install_all(){
   echo ⠀
   sleep 1
   echo ⠀
-  echo -e "then you can start the server with ${com}./server.sh start${NC}."
+  echo -e "then you can start the server with ${com}./server start${NC}."
   echo ⠀
   sleep 1
 }
@@ -35,7 +35,7 @@ install_script(){
   chmod +x server.sh
   sleep 1
   echo ⠀
-  echo -e "then you can start the server with ${com}./server.sh start${NC}."
+  echo -e "then you can start the server with ${com}./server start${NC}."
   echo ⠀
   sleep 1
 }
@@ -55,7 +55,7 @@ install_server(){
 }
 #About the script
 about(){
-  echo -e "This is a non-official script to download beammp and also to run a server that is online 24/7. If you don't trust this script you can also just delete it with ${com}./rm install.sh${NC}"
+  echo -e "This is a non-official script to download beammp and also to run a server that is online 24/7. If you don't trust this script you can also just delete it with ${com}./rm install${NC}"
 }
 #Query if something is installed
   read -p "Are you sure you have wget, unzip, screen and liblua5.3 installed? for help type h: " yn
@@ -84,5 +84,3 @@ while true; do
         * ) echo "Please answer 1, 2 or 3.";;
   esac
 done
-
-
