@@ -1,0 +1,28 @@
+ase "$1" in
+    start)
+        screen -AmdS server ./BeamMP-Server-linux
+        sleep 0.5
+        echo The server server was started
+    ;;
+    stop)
+        screen -r server -X quit
+        sleep 0.5
+        echo The server was stopped
+    ;;
+    restart)
+        screen -r v server -X quit
+        sleep 0.5
+        echo The server is restarted
+        screen -AmdS server ./BeamMP-Server-linux
+    ;;
+    terminal)
+	screen -r server
+    ;;
+    help)
+	ups
+    ;;
+    *)
+        echo "Invalid usage: ${0} {start|stop|restart|terminal}"
+esac
+
+
