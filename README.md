@@ -12,4 +12,4 @@ Instructions:
   1. Start server: `./server start`
   2. Stop server: `./server stop`
   3. Restart server: `./server restart`
-  6. Console of the server: `./server console`
+  6. Console of the server: `./server terminal`
