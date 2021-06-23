@@ -1,5 +1,7 @@
 # unofficial-BeamMP-Server-installer
 
+!!!Does not work with the server beta version!!!
+
 This is a third party script. I am not a developer of BeamMP and I am not on the BeamMP team. Otherwise, I just found it can be too hard for some to get beammp running properly.
 
 Instructions:
