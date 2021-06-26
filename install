@@ -1,16 +1,64 @@
-#colors
-nam='\033[0;31m'
-ver='\033[0;32m'
-com='\033[0;35m'
-NC='\033[0m'
-#about me
+#color out
+command='\033[1;32m'
+version='\033[0;32m'
+name='\033[0;35m'
+default='\033[0m'
+hide='\033[0;30m'
+y='\033[0;36m'
+n='\033[0;31m'
+
+#welcome
 echo -e "**************************************"
 echo -e "* unofficial BeamMP Server installer *"
-echo -e "*            by ${nam}LiLZora${NC}              *"
-echo -e "*               ${ver}V.0.6${NC}                *"
+echo -e "*         By ${name}Kiznaiver System${default}        *"
+echo -e "*             ${version}Version 0.8${default}            *"
 echo -e "**************************************"
-sleep 0.5
-#Installs everything
+
+#Program?
+echo -e "Check if all necessary programs are available"
+#wget
+if dpkg-query -s wget 1>/dev/null 2>/dev/null; then
+    echo -e "${y} wget is installed ${default}"
+    sleep 0.2
+else
+    echo -e "${n} wget is not installed ${default}"
+    echo -e "You can download it with${command} sudo apt install wget -y${default}"
+    sleep 0.2
+fi
+#screen
+if dpkg-query -s screen 1>/dev/null 2>/dev/null; then
+    echo -e "${y} screen is installed ${default}"
+    sleep 0.2
+else
+    echo -e "$n screen is not installed ${default}"
+    echo -e "You can download it with sudo ${command}sudo apt install wget -y${default}"
+    sleep 0.2
+fi
+#unzip
+if dpkg-query -s unzip 1>/dev/null 2>/dev/null; then
+    echo -e "${y} unzip is installed ${default}"
+    sleep 0.2
+else
+    echo -e "$n unzip is not installed ${default}"
+    echo -e "You can download it with sudo ${command}sudo apt install wget -y${default}"
+    sleep 0.2
+fi
+#liblua5.3
+if dpkg-query -s liblua5.3-dev 1>/dev/null 2>/dev/null; then
+  echo -e "${y} liblua5.3-dev is installed ${default}"
+  sleep 0.2
+else
+  echo -e "$n liblua5.3-dev is not installed ${default}"
+  echo -e "You can download it with sudo ${command}sudo apt install wget -y${default}"
+  sleep 0.2
+fi
+#all?
+read -p "If everything is installed please confirm otherwise please exit the script > " yn
+case $yn in
+    [Yy]* ) ;;
+    [Nn]* ) exit;;
+esac
+
 install_all(){
   wget https://beammp.com/server/BeamMP_Server.zip
   unzip BeamMP_Server.zip
@@ -21,11 +69,11 @@ install_all(){
   wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/start_scr/server
   chmod +x server
   echo ⠀
-  echo -e "before you start the server you have to edit the server.cfg with ${com}nano Server.cfg${NC} so that you can enter your authkey."
+  echo -e "before you start the server you have to edit the server. with ${command}ServerConfig.toml${default} so that you can enter your authkey."
   echo ⠀
   sleep 1
   echo ⠀
-  echo -e "then you can start the server with ${com}./server start${NC}."
+  echo -e "then you can start the server with ${command}./server start${default}."
   echo ⠀
   sleep 1
 }
@@ -35,7 +83,7 @@ install_script(){
   chmod +x server
   sleep 1
   echo ⠀
-  echo -e "then you can start the server with ${com}./server start${NC}."
+  echo -e "then you can start the server with ${command}./server start${default}."
   echo ⠀
   sleep 1
 }
@@ -49,25 +97,10 @@ install_server(){
   screen -AmdS install_temp ./BeamMP-Server-linux
   sleep 1
   echo ⠀
-  echo -e "before you start the server you have to edit the server.cfg with ${com}nano Server.cfg${NC} so that you can enter your authkey."
+  echo -e "before you start the server you have to edit the ServerConfig.toml with ${command}ServerConfig.toml${default} so that you can enter your authkey."
   echo ⠀
   sleep 1
 }
-#About the script
-about(){
-  echo -e "This is a non-official script to download beammp and also to run a server that is online 24/7. If you don't trust this script you can also just delete it with ${com}./rm install${NC}"
-}
-#Query if something is installed
-  read -p "Are you sure you have wget, unzip, screen and liblua5.3 installed? for help type h: " yn
-  case $yn in
-      [Yy]* ) ;;
-      [Nn]* ) exit;;
-      [Hh]* )
-      echo ⠀
-      echo run as root "apt install wget screen liblua5.3-dev unzip -y" to be sure
-      echo ⠀;;
-      * ) echo "Please answer yes , no or help.; ";;
-  esac
 #Query what should be done
 while true; do
     echo "What do you want to do
@@ -75,12 +108,12 @@ while true; do
     2. Only the server management script
     3. Install both
     4. About this script"
-    read -p "So?: " yn
+    read -p "> " yn
     case $yn in
         [1]* ) install_server; exit;;
         [2]* ) install_script; exit;;
         [3]* ) install_all; exit;;
         [4]* ) about;;
-        * ) echo "Please answer 1, 2 or 3.";;
-  esac
+        * ) echo "Please answer 1, 2, 3 or 4.";;
+    esac
 done
