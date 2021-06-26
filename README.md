@@ -4,6 +4,14 @@
 
 This is a third party script. I am not a developer of BeamMP and I am not on the BeamMP team. Otherwise, I just found it can be too hard for some to get beammp running properly.
 
+# Supported BeamMP version
+Installer:
+[2.1.1](https://github.com/BeamMP/BeamMP-Server/tree/v2.1.1)
+
+Server run:
+2.1.1
+Beta 
+
 # Instructions:
  1. Please note that you need 'unzip', 'screen' and 'liblua5.3'. You can install it with this command as root: `apt install screen liblua5.3-dev unzip -y`
  2. Download the install script: `wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/v0.8_2106/install`
