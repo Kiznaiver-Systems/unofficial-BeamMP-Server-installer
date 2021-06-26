@@ -9,8 +9,7 @@ Installer:
 [2.1.1](https://github.com/BeamMP/BeamMP-Server/tree/v2.1.1)
 
 Server run:
-2.1.1
-Beta 
+2.1.1 and Beta
 
 # Instructions:
  1. Please note that you need 'unzip', 'screen' and 'liblua5.3'. You can install it with this command as root: `apt install screen liblua5.3-dev unzip -y`
