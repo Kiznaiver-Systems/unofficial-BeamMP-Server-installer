@@ -10,7 +10,7 @@ n='\033[0;31m'
 echo -e "**************************************"
 echo -e "* unofficial BeamMP Server installer *"
 echo -e "*         By ${name}Kiznaiver System${default}        *"
-echo -e "*             ${version}Version 0.8.5${default}            *"
+echo -e "*            ${version}Version 0.8.5${default}            *"
 echo -e "**************************************"
 #Program?
 echo -e "Packages are updated"
