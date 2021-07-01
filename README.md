@@ -12,7 +12,7 @@ Server run:
 2.1.1 and Beta
 
 # Instructions:
- 1. Download the install script: `wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/v0.8_2106/install`
+ 1. Download the install script: `wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/v0.8.5_2107/install`
  2. Give the script rights to execute: `chmod +x install`
  3. Start the script: `./install`
  
