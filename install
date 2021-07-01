@@ -6,16 +6,17 @@ default='\033[0m'
 hide='\033[0;30m'
 y='\033[0;36m'
 n='\033[0;31m'
-
 #welcome
 echo -e "**************************************"
 echo -e "* unofficial BeamMP Server installer *"
 echo -e "*         By ${name}Kiznaiver System${default}        *"
-echo -e "*             ${version}Version 0.8${default}            *"
+echo -e "*             ${version}Version 0.8.5${default}            *"
 echo -e "**************************************"
-
 #Program?
+echo -e "Packages are updated"
+apt update 2>/dev/null
 echo -e "Check if all necessary programs are available"
+
 #wget
 if dpkg-query -s wget 1>/dev/null 2>/dev/null; then
     echo -e "${y} wget is installed ${default}"
@@ -53,53 +54,99 @@ else
   sleep 0.2
 fi
 #all?
-read -p "If everything is installed please confirm otherwise please exit the script > " yn
-case $yn in
+read -p "If everything is installed please confirm otherwise please exit the script [y/n] > " is
+case $is in
     [Yy]* ) ;;
     [Nn]* ) exit;;
 esac
-
 install_all(){
-  wget https://beammp.com/server/BeamMP_Server.zip
-  unzip BeamMP_Server.zip
+  read -p "what should the server folder be called? " fn
+  if [ -d $fn ];
+  then
+    read -p "$fn already exists is to be driven forward [y/n] > " fne
+    case $fne in
+        [Yy]* ) cd $fn;;
+        [Nn]* ) install_all; exit;;
+    esac
+  else
+    mkdir $fn
+    cd $fn
+  fi
+  echo "Downloding:"
+  wget https://beammp.com/server/BeamMP_Server.zip -q --show-progress
+  unzip BeamMP_Server.zip 1>/dev/null 2>/dev/null
   rm BeamMP-Server.exe
   rm BeamMP_Server.zip
   chmod +x BeamMP-Server-linux
   screen -AmdS install_temp ./BeamMP-Server-linux
-  wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/start_scr/server
+  echo Downloding:
+  wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/start_scr/server -q --show-progress
   chmod +x server
   echo ⠀
-  echo -e "before you start the server you have to edit the server. with ${command}ServerConfig.toml${default} so that you can enter your authkey."
+  echo -e "before you start the server you have to edit the server. with ${command}nano ${fn}/ServerConfig.toml${default} so that you can enter your authkey."
   echo ⠀
   sleep 1
   echo ⠀
-  echo -e "then you can start the server with ${command}./server start${default}."
+  echo -e "then you can start the server with ${command}./${fn}/server start${default}."
   echo ⠀
   sleep 1
 }
 #Installs only the server script
 install_script(){
-  wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/start_scr/server
+  read -p "what should the server folder be called? " fn
+  if [ -d $fn ];
+  then
+    cd $fn
+  else
+    read -p "$fn name is not an odner do you want to [c]reate it or [t]ry again" fne
+    case $fne in
+        [Tt]* ) install_script; exit;;
+        [Cc]* ) mkdir $fn; cd $fn;;
+    esac
+  fi
+  echo Downloding:
+  wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/start_scr/server -q --show-progress
   chmod +x server
   sleep 1
   echo ⠀
-  echo -e "then you can start the server with ${command}./server start${default}."
+  echo -e "then you can start the server with ${command}./${fn}/server start${default}."
   echo ⠀
   sleep 1
 }
 #Installs only the BeamMP server
 install_server(){
-  wget https://beammp.com/server/BeamMP_Server.zip
-  unzip BeamMP_Server.zip
+  read -p "what should the server folder be called? " fn
+  if [ -d $fn ];
+  then
+    read -p "$fn already exists is to be driven forward [y/n] > " fne
+    case $fne in
+        [Yy]* ) cd $fn;;
+        [Nn]* ) install_server; exit;;
+    esac
+  else
+    mkdir $fn
+    cd $fn
+  fi
+  echo Downloding:
+  wget https://beammp.com/server/BeamMP_Server.zip -q --show-progress
+  unzip BeamMP_Server.zip 1>/dev/null 2>/dev/null
   rm BeamMP-Server.exe
   rm BeamMP_Server.zip
   chmod +x BeamMP-Server-linux
   screen -AmdS install_temp ./BeamMP-Server-linux
   sleep 1
   echo ⠀
-  echo -e "before you start the server you have to edit the ServerConfig.toml with ${command}ServerConfig.toml${default} so that you can enter your authkey."
+  echo -e "before you start the server you have to edit the ServerConfig.toml with ${command}nano ${fn}/ServerConfig.toml${default} so that you can enter your authkey."
   echo ⠀
   sleep 1
+}
+about(){
+  echo -e "The script is from ${name}Kiznaiver System${default}"
+  echo -e "I have nothing to do directly with the BeamMP team I just want to support it because I think the server install on the website is a little too complicated"
+  echo -e "Links:
+  My GitHub:       https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer
+  BeamMP´s Github: https://github.com/BeamMP/BeamMP
+  BeamMP:          https://beammp.com/"
 }
 #Query what should be done
 while true; do
