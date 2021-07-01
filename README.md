@@ -9,7 +9,7 @@ Installer:
 [2.1.1](https://github.com/BeamMP/BeamMP-Server/tree/v2.1.1)
 
 Server run:
-2.1.1 and Beta
+[2.1.1](https://github.com/BeamMP/BeamMP-Server/tree/v2.1.1) and [Beta](https://discord.com/channels/601558901657305098/714903107573776394)
 
 # Instructions:
  1. Download the install script: `wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/v0.8.5_2107/install`
