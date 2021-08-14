@@ -8,10 +8,10 @@ This is a third party script. I am not a developer of BeamMP and I am not on the
 
 # Supported BeamMP version
 Installer:
-[2.1.1](https://github.com/BeamMP/BeamMP-Server/tree/v2.1.1)
+[2.2.0](https://github.com/BeamMP/BeamMP-Server/tree/v2.2.0)
 
 Server run:
-[2.1.1](https://github.com/BeamMP/BeamMP-Server/tree/v2.1.1) and [Beta](https://discord.com/channels/601558901657305098/714903107573776394)
+[2.2.0](https://github.com/BeamMP/BeamMP-Server/tree/v2.1.1) and [Beta](https://discord.com/channels/601558901657305098/714903107573776394)
 
 # Instructions:
  1. Download the install script: `wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/v0.8.5_2107/install`
