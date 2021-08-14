@@ -1,28 +1,26 @@
-case "$1" in
+case $serverag1 in
     start)
-        screen -AmdS server ./BeamMP-Server-linux
+        screen -AmdS $sn2 ./BeamMP-Server-linux
         sleep 0.5
-        echo The server server was started
+        echo The $sn2 was started
     ;;
     stop)
-        screen -r server -X quit
+        screen -r $sn2 -X quit
         sleep 0.5
-        echo The server was stopped
+        echo The $sn2 was stopped
     ;;
     restart)
-        screen -r v server -X quit
+        screen -r v $sn2 -X quit
         sleep 0.5
-        echo The server is restarted
-        screen -AmdS server ./BeamMP-Server-linux
+        echo The $sn2 is restarted
+        screen -AmdS $sn2 ./BeamMP-Server-linux
     ;;
     terminal)
-	screen -r server
+  screen -r server
     ;;
     help)
-	ups
+  ups
     ;;
     *)
-        echo "Invalid usage: ${0} {start|stop|restart|terminal}"
+        echo Invalid usage: $serverag2 {start|stop|restart|terminal}
 esac
-
-
