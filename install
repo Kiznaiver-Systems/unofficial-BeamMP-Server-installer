@@ -1,4 +1,4 @@
-#color out
+#Colors and other aguments
 command='\033[1;32m'
 version='\033[0;32m'
 name='\033[0;35m'
@@ -6,15 +6,17 @@ default='\033[0m'
 hide='\033[0;30m'
 y='\033[0;36m'
 n='\033[0;31m'
-#welcome
+curver='0.8.8'
+serverag1='$1'
+serverag2='$0'
+#headstart
 echo -e "**************************************"
 echo -e "* unofficial BeamMP Server installer *"
 echo -e "*         By ${name}Kiznaiver System${default}        *"
-echo -e "*            ${version}Version 0.8.5${default}            *"
+echo -e "*            ${version}Version ${curver}${default}            *"
 echo -e "**************************************"
-#Program?
-echo -e "Packages are updated"
-apt update 2>/dev/null
+
+#Test if all important programs are installed
 echo -e "Check if all necessary programs are available"
 
 #wget
@@ -26,41 +28,48 @@ else
     echo -e "You can download it with${command} sudo apt install wget -y${default}"
     sleep 0.2
 fi
+
 #screen
 if dpkg-query -s screen 1>/dev/null 2>/dev/null; then
     echo -e "${y} screen is installed ${default}"
     sleep 0.2
 else
     echo -e "$n screen is not installed ${default}"
-    echo -e "You can download it with sudo ${command}sudo apt install wget -y${default}"
+    echo -e "You can download it with sudo ${command}sudo apt install screen -y${default}"
     sleep 0.2
 fi
+
 #unzip
 if dpkg-query -s unzip 1>/dev/null 2>/dev/null; then
     echo -e "${y} unzip is installed ${default}"
     sleep 0.2
 else
     echo -e "$n unzip is not installed ${default}"
-    echo -e "You can download it with sudo ${command}sudo apt install wget -y${default}"
+    echo -e "You can download it with sudo ${command}sudo apt unzip wget -y${default}"
     sleep 0.2
 fi
-#liblua5.3
+
+#liblua5.3-dev
 if dpkg-query -s liblua5.3-dev 1>/dev/null 2>/dev/null; then
   echo -e "${y} liblua5.3-dev is installed ${default}"
   sleep 0.2
 else
   echo -e "$n liblua5.3-dev is not installed ${default}"
-  echo -e "You can download it with sudo ${command}sudo apt install wget -y${default}"
+  echo -e "You can download it with sudo ${command}sudo apt install liblua5.3-dev -y${default}"
   sleep 0.2
 fi
+
 #all?
-read -p "If everything is installed please confirm otherwise please exit the script [y/n] > " is
-case $is in
-    [Yy]* ) ;;
-    [Nn]* ) exit;;
-esac
+while true; do
+  read -p "If everything is installed please confirm otherwise please exit the script [y/n] > " is
+  case $is in
+      [Yy]* ) break;;
+      [Nn]* ) exit;;
+    esac
+done
+
 install_all(){
-  read -p "what should the server folder be called? " fn
+  read -p "What should the server folder be called? " fn
   if [ -d $fn ];
   then
     read -p "$fn already exists is to be driven forward [y/n] > " fne
@@ -72,28 +81,55 @@ install_all(){
     mkdir $fn
     cd $fn
   fi
-  echo "Downloding:"
+  echo Downloading:
   wget https://beammp.com/server/BeamMP_Server.zip -q --show-progress
   unzip BeamMP_Server.zip 1>/dev/null 2>/dev/null
   rm BeamMP-Server.exe
   rm BeamMP_Server.zip
   chmod +x BeamMP-Server-linux
   screen -AmdS install_temp ./BeamMP-Server-linux
-  echo Downloding:
-  wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/start_scr/server -q --show-progress
+  read -p "what should the server be called internally? > " sn1
+  exec 3<> server
+    echo "case $serverag1 in
+    start)
+        screen -AmdS $sn1 ./BeamMP-Server-linux
+        sleep 0.5
+        echo The $sn1 was started
+    ;;
+    stop)
+        screen -r $sn1 -X quit
+        sleep 0.5
+        echo The $sn1 was stopped
+    ;;
+    restart)
+        screen -r v $sn1 -X quit
+        sleep 0.5
+        echo The $sn1 is restarted
+        screen -AmdS $sn1 ./BeamMP-Server-linux
+    ;;
+    terminal)
+	screen -r server
+    ;;
+    help)
+	ups
+    ;;
+    *)
+        echo Invalid usage: $serverag2 {start|stop|restart|terminal}
+esac" >&3
+  exec 3>&-
   chmod +x server
   echo ⠀
-  echo -e "before you start the server you have to edit the server. with ${command}nano ${fn}/ServerConfig.toml${default} so that you can enter your authkey."
+  echo -e "Before you start the server you have to edit the server. with ${command}nano /${fn}/ServerConfig.toml${default} so that you can enter your authkey."
   echo ⠀
   sleep 1
   echo ⠀
-  echo -e "then you can start the server with ${command}./${fn}/server start${default}."
+  echo -e "Then you can start the server with ${command}./${fn}/server start${default}."
   echo ⠀
   sleep 1
 }
 #Installs only the server script
 install_script(){
-  read -p "what should the server folder be called? " fn
+  read -p "What should the server folder be called? " fn
   if [ -d $fn ];
   then
     cd $fn
@@ -104,21 +140,47 @@ install_script(){
         [Cc]* ) mkdir $fn; cd $fn;;
     esac
   fi
-  echo Downloding:
-  wget https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer/releases/download/start_scr/server -q --show-progress
-  chmod +x server
+  read -p "what should the server be called internally? > " sn2
+  exec 3<> server
+    echo "case $serverag1 in
+    start)
+        screen -AmdS $sn2 ./BeamMP-Server-linux
+        sleep 0.5
+        echo The $sn2 was started
+    ;;
+    stop)
+        screen -r $sn2 -X quit
+        sleep 0.5
+        echo The $sn2 was stopped
+    ;;
+    restart)
+        screen -r v $sn2 -X quit
+        sleep 0.5
+        echo The $sn2 is restarted
+        screen -AmdS $sn2 ./BeamMP-Server-linux
+    ;;
+    terminal)
+  screen -r server
+    ;;
+    help)
+  ups
+    ;;
+    *)
+        echo Invalid usage: $serverag2 {start|stop|restart|terminal}
+esac" >&3
+  exec 3>&-
   sleep 1
   echo ⠀
-  echo -e "then you can start the server with ${command}./${fn}/server start${default}."
+  echo -e "Then you can start the server with ${command}./${fn}/server start${default}."
   echo ⠀
   sleep 1
 }
 #Installs only the BeamMP server
 install_server(){
-  read -p "what should the server folder be called? " fn
+  read -p "What should the server folder be called? " fn
   if [ -d $fn ];
   then
-    read -p "$fn already exists is to be driven forward [y/n] > " fne
+    read -p "$fn Already exists is to be driven forward [y/n] > " fne
     case $fne in
         [Yy]* ) cd $fn;;
         [Nn]* ) install_server; exit;;
@@ -136,7 +198,7 @@ install_server(){
   screen -AmdS install_temp ./BeamMP-Server-linux
   sleep 1
   echo ⠀
-  echo -e "before you start the server you have to edit the ServerConfig.toml with ${command}nano ${fn}/ServerConfig.toml${default} so that you can enter your authkey."
+  echo -e "Before you start the server you have to edit the ServerConfig.toml with ${command}nano /${fn}/ServerConfig.toml${default} so that you can enter your authkey."
   echo ⠀
   sleep 1
 }
@@ -147,6 +209,7 @@ about(){
   My GitHub:       https://github.com/KIznaiver-system/unofficial-BeamMP-Server-installer
   BeamMP´s Github: https://github.com/BeamMP/BeamMP
   BeamMP:          https://beammp.com/"
+  sleep 2
 }
 #Query what should be done
 while true; do
