@@ -1,3 +1,5 @@
+I am currently working on a brand new version with different options
+
 # unofficial-BeamMP-Server-installer
 
 !!!Does not work with the server beta version!!!
