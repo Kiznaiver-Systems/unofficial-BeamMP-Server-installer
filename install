@@ -9,6 +9,7 @@ n='\033[0;31m'
 curver='0.8.8'
 serverag1='$1'
 serverag2='$0'
+rm README.md server
 #headstart
 echo -e "**************************************"
 echo -e "* unofficial BeamMP Server installer *"
@@ -102,7 +103,7 @@ install_all(){
         echo The $sn1 was stopped
     ;;
     restart)
-        screen -r v $sn1 -X quit
+        screen -r $sn1 -X quit
         sleep 0.5
         echo The $sn1 is restarted
         screen -AmdS $sn1 ./BeamMP-Server-linux
