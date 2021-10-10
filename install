@@ -9,6 +9,7 @@ n='\033[0;31m'
 curver='0.8.8'
 serverag1='$1'
 serverag2='$0'
+sign1='"'
 rm README.md server
 #headstart
 echo -e "**************************************"
@@ -20,54 +21,42 @@ echo -e "**************************************"
 #Test if all important programs are installed
 echo -e "Check if all necessary programs are available"
 
-#wget
-if dpkg-query -s wget 1>/dev/null 2>/dev/null; then
-    echo -e "${y} wget is installed ${default}"
-    sleep 0.2
-else
-    echo -e "${n} wget is not installed ${default}"
-    echo -e "You can download it with${command} sudo apt install wget -y${default}"
-    sleep 0.2
-fi
-
-#screen
-if dpkg-query -s screen 1>/dev/null 2>/dev/null; then
+### wget check ###
+if dpkg-query -s wget 1>/dev/null 2>/dev/null;
+then
+  echo -e "${y} wget is installed ${default}"
+  ### screen check ###
+  if dpkg-query -s screen 1>/dev/null 2>/dev/null;
+  then
     echo -e "${y} screen is installed ${default}"
-    sleep 0.2
-else
+    ### unzip check ###
+    if dpkg-query -s unzip 1>/dev/null 2>/dev/null;
+      then
+      echo -e "${y} unzip is installed ${default}"
+      ### liblua check ###
+      if dpkg-query -s liblua5.3-dev 1>/dev/null 2>/dev/null;
+        then
+        echo -e "${y} liblua5.3-dev is installed ${default}"
+        else
+        echo -e "$n liblua5.3-dev is not installed ${default}"
+        echo -e "You can download it with sudo ${command}sudo apt install liblua5.3-dev -y${default}"
+        exit
+      fi
+    else
+      echo -e "$n unzip is not installed ${default}"
+      echo -e "You can download it with sudo ${command}sudo apt unzip wget -y${default}"
+      exit
+    fi
+  else
     echo -e "$n screen is not installed ${default}"
     echo -e "You can download it with sudo ${command}sudo apt install screen -y${default}"
-    sleep 0.2
-fi
-
-#unzip
-if dpkg-query -s unzip 1>/dev/null 2>/dev/null; then
-    echo -e "${y} unzip is installed ${default}"
-    sleep 0.2
+    exit
+  fi
 else
-    echo -e "$n unzip is not installed ${default}"
-    echo -e "You can download it with sudo ${command}sudo apt unzip wget -y${default}"
-    sleep 0.2
+  echo -e "${n} wget is not installed ${default}"
+  echo -e "You can download it with${command} sudo apt install wget -y${default}"
+  exit
 fi
-
-#liblua5.3-dev
-if dpkg-query -s liblua5.3-dev 1>/dev/null 2>/dev/null; then
-  echo -e "${y} liblua5.3-dev is installed ${default}"
-  sleep 0.2
-else
-  echo -e "$n liblua5.3-dev is not installed ${default}"
-  echo -e "You can download it with sudo ${command}sudo apt install liblua5.3-dev -y${default}"
-  sleep 0.2
-fi
-
-#all?
-while true; do
-  read -p "If everything is installed please confirm otherwise please exit the script [y/n] > " is
-  case $is in
-      [Yy]* ) break;;
-      [Nn]* ) exit;;
-    esac
-done
 
 install_all(){
   read -p "What should the server folder be called? " fn
@@ -109,10 +98,14 @@ install_all(){
         screen -AmdS $sn1 ./BeamMP-Server-linux
     ;;
     terminal)
-	screen -r server
+	screen -r $sn1
     ;;
     help)
-	ups
+	echo ${sign1}These are all commands:
+  ./server start
+  ./server restart
+  ./server stop
+  ./server terminal${sign1}
     ;;
     *)
         echo Invalid usage: $serverag2 {start|stop|restart|terminal}
@@ -155,16 +148,20 @@ install_script(){
         echo The $sn2 was stopped
     ;;
     restart)
-        screen -r v $sn2 -X quit
+        screen -r $sn2 -X quit
         sleep 0.5
         echo The $sn2 is restarted
         screen -AmdS $sn2 ./BeamMP-Server-linux
     ;;
     terminal)
-  screen -r server
+  screen -r $sn2
     ;;
     help)
-  ups
+    echo ${sign1}These are all commands:
+    ./server start
+    ./server restart
+    ./server stop
+    ./server terminal${sign1}
     ;;
     *)
         echo Invalid usage: $serverag2 {start|stop|restart|terminal}
