@@ -22,39 +22,77 @@ echo -e "**************************************"
 echo -e "Check if all necessary programs are available"
 
 ### wget check ###
-if dpkg-query -s wget 1>/dev/null 2>/dev/null;
-then
-  echo -e "${y} wget is installed ${default}"
-  ### screen check ###
-  if dpkg-query -s screen 1>/dev/null 2>/dev/null;
-  then
-    echo -e "${y} screen is installed ${default}"
-    ### unzip check ###
-    if dpkg-query -s unzip 1>/dev/null 2>/dev/null;
-      then
-      echo -e "${y} unzip is installed ${default}"
-      ### liblua check ###
-      if dpkg-query -s liblua5.3-dev 1>/dev/null 2>/dev/null;
-        then
-        echo -e "${y} liblua5.3-dev is installed ${default}"
-        else
-        echo -e "$n liblua5.3-dev is not installed ${default}"
-        echo -e "You can download it with sudo ${command}sudo apt install liblua5.3-dev -y${default}"
-        exit
-      fi
-    else
-      echo -e "$n unzip is not installed ${default}"
-      echo -e "You can download it with sudo ${command}sudo apt unzip wget -y${default}"
-      exit
-    fi
-  else
-    echo -e "$n screen is not installed ${default}"
-    echo -e "You can download it with sudo ${command}sudo apt install screen -y${default}"
-    exit
-  fi
+if dpkg-query -s wget 1>/dev/null 2>/dev/null; then
+    echo -e "${y} wget is installed ${default}"
 else
   echo -e "${n} wget is not installed ${default}"
   echo -e "You can download it with${command} sudo apt install wget -y${default}"
+  ### screen check ### error ###
+  if dpkg-query -s screen 1>/dev/null 2>/dev/null; then
+      echo -e "${y} screen is installed ${default}"
+  else
+      echo -e "$n screen is not installed ${default}"
+      echo -e "You can download it with sudo ${command}sudo apt install screen -y${default}"
+  fi
+  ### unzip check ### error ###
+  if dpkg-query -s unzip 1>/dev/null 2>/dev/null; then
+      echo -e "${y} unzip is installed ${default}"
+  else
+      echo -e "$n unzip is not installed ${default}"
+      echo -e "You can download it with sudo ${command}sudo apt unzip wget -y${default}"
+  fi
+  ### liblua5.3-dev check ### error ###
+  if dpkg-query -s liblua5.3-dev 1>/dev/null 2>/dev/null; then
+    echo -e "${y} liblua5.3-dev is installed ${default}"
+  else
+    echo -e "$n liblua5.3-dev is not installed ${default}"
+    echo -e "You can download it with sudo ${command}sudo apt install liblua5.3-dev -y${default}"
+    exit
+  fi
+fi
+### screen check ###
+if dpkg-query -s screen 1>/dev/null 2>/dev/null; then
+    echo -e "${y} screen is installed ${default}"
+else
+    echo -e "$n screen is not installed ${default}"
+    echo -e "You can download it with sudo ${command}sudo apt install screen -y${default}"
+    ### unzip check ### error ###
+    if dpkg-query -s unzip 1>/dev/null 2>/dev/null; then
+        echo -e "${y} unzip is installed ${default}"
+    else
+        echo -e "$n unzip is not installed ${default}"
+        echo -e "You can download it with sudo ${command}sudo apt unzip wget -y${default}"
+    fi
+    ### liblua check ### error ###
+    if dpkg-query -s liblua5.3-dev 1>/dev/null 2>/dev/null; then
+      echo -e "${y} liblua5.3-dev is installed ${default}"
+    else
+      echo -e "$n liblua5.3-dev is not installed ${default}"
+      echo -e "You can download it with sudo ${command}sudo apt install liblua5.3-dev -y${default}"
+    fi
+    exit
+fi
+### unzip check ###
+if dpkg-query -s unzip 1>/dev/null 2>/dev/null; then
+    echo -e "${y} unzip is installed ${default}"
+else
+    echo -e "$n unzip is not installed ${default}"
+    echo -e "You can download it with sudo ${command}sudo apt unzip wget -y${default}"
+    ### liblua check ### error ###
+    if dpkg-query -s liblua5.3-dev 1>/dev/null 2>/dev/null; then
+      echo -e "${y} liblua5.3-dev is installed ${default}"
+    else
+      echo -e "$n liblua5.3-dev is not installed ${default}"
+      echo -e "You can download it with sudo ${command}sudo apt install liblua5.3-dev -y${default}"
+    fi
+    exit
+fi
+### liblua check ###
+if dpkg-query -s liblua5.3-dev 1>/dev/null 2>/dev/null; then
+  echo -e "${y} liblua5.3-dev is installed ${default}"
+else
+  echo -e "$n liblua5.3-dev is not installed ${default}"
+  echo -e "You can download it with sudo ${command}sudo apt install liblua5.3-dev -y${default}"
   exit
 fi
 
