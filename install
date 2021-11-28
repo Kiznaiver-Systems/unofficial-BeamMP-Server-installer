@@ -50,6 +50,7 @@ else
     exit
   fi
 fi
+
 ### screen check ###
 if dpkg-query -s screen 1>/dev/null 2>/dev/null; then
     echo -e "${y} screen is installed ${default}"
@@ -72,6 +73,7 @@ else
     fi
     exit
 fi
+
 ### unzip check ###
 if dpkg-query -s unzip 1>/dev/null 2>/dev/null; then
     echo -e "${y} unzip is installed ${default}"
@@ -87,6 +89,7 @@ else
     fi
     exit
 fi
+
 ### liblua check ###
 if dpkg-query -s liblua5.3-dev 1>/dev/null 2>/dev/null; then
   echo -e "${y} liblua5.3-dev is installed ${default}"
